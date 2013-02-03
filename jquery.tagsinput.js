@@ -96,7 +96,7 @@
 				}
 				if (value !='' && skipTag != true) { 
                     $('<span>').addClass('tag').append(
-                        $('<span>').text(value).append('&nbsp;&nbsp;'),
+                        $('<span>').text(value),
                         $('<a>', {
                             href  : '#',
                             title : 'Removing tag',
@@ -311,7 +311,6 @@
 					{
 						 event.preventDefault();
 						 var last_tag = $(this).closest('.tagsinput').find('.tag:last span').text();
-                         last_tag = last_tag.replace(/\s+$/, '');
 						 var id = $(this).attr('id').replace(/_tag$/, '');
 						 $('#' + id).removeTag(escape(last_tag));
 						 $(this).trigger('focus');
