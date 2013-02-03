@@ -94,14 +94,13 @@
 				} else {
 					var skipTag = false; 
 				}
-				
 				if (value !='' && skipTag != true) { 
                     $('<span>').addClass('tag').append(
                         $('<span>').text(value).append('&nbsp;&nbsp;'),
                         $('<a>', {
                             href  : '#',
                             title : 'Removing tag',
-                            text  : 'x'
+                            text  : $('#' + this.id + '_tagsinput').data('removeText')
                         }).click(function () {
                             return $('#' + id).removeTag(escape(value));
                         })
@@ -178,6 +177,7 @@
     var settings = jQuery.extend({
       interactive:true,
       defaultText:'add a tag',
+      removeText:'x',
       minChars:0,
       autocomplete: {selectFirst: false },
       'hide':true,
@@ -224,7 +224,11 @@
 			
 			markup = markup + '</div><div class="tags_clear"></div></div>';
 			
-			$(markup).insertAfter(this);
+			var markupElement = $(markup)
+            markupElement.insertAfter(this);
+            var tagsinput = markupElement.filter('.tagsinput');
+            tagsinput.data('removeText', settings.removeText);
+            console.log([tagsinput[0], tagsinput.data()]);
 
 			$(data.holder).css('width',settings.width);
 			$(data.holder).css('min-height',settings.height);
@@ -306,9 +310,9 @@
 					if(event.keyCode == 8 && $(this).val() == '')
 					{
 						 event.preventDefault();
-						 var last_tag = $(this).closest('.tagsinput').find('.tag:last').text();
+						 var last_tag = $(this).closest('.tagsinput').find('.tag:last span').text();
+                         last_tag = last_tag.replace(/\s+$/, '');
 						 var id = $(this).attr('id').replace(/_tag$/, '');
-						 last_tag = last_tag.replace(/[\s]+x$/, '');
 						 $('#' + id).removeTag(escape(last_tag));
 						 $(this).trigger('focus');
 					}
