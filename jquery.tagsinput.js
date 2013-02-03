@@ -99,9 +99,8 @@
                         $('<span>').text(value),
                         $('<a>', {
                             href  : '#',
-                            title : 'Removing tag',
-                            text  : $('#' + this.id + '_tagsinput').data('removeText')
-                        }).click(function () {
+                            title : 'Removing tag'
+                        }).html($('#' + this.id + '_tagsinput').data('removeText')).click(function () {
                             return $('#' + id).removeTag(escape(value));
                         })
                     ).insertBefore('#' + id + '_addTag');
