@@ -227,7 +227,6 @@
             markupElement.insertAfter(this);
             var tagsinput = markupElement.filter('.tagsinput');
             tagsinput.data('removeText', settings.removeText);
-            console.log([tagsinput[0], tagsinput.data()]);
 
 			$(data.holder).css('width',settings.width);
 			$(data.holder).css('min-height',settings.height);
